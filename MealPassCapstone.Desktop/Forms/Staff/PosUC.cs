@@ -1,53 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+using System;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.XtraEditors;
-using MealPass.Data.Repositories;
+using MealPass.Business.Services;
+using MealPass.Core.Interface;
 using MealPassCapstone.Desktop.Helpers;
 
 namespace MealPassCapstone.Desktop.Forms.Staff
 {
     public partial class PosUC : DevExpress.XtraEditors.XtraUserControl
     {
-        private readonly ProductRepository _productRepo = new ProductRepository();
+        private readonly IProductService _productService = new ProductService();
+        private readonly ICartService _cartService = new CartService();
+
         public PosUC()
         {
             InitializeComponent();
             Cancel.ColumnEdit = repositoryItemCancelBTN;
             this.Load += PosUC_LoadAsync;
         }
+
         private async void PosUC_LoadAsync(object sender, EventArgs e)
         {
             await LoadProductsAsync();
         }
+
         private async Task LoadSnacksAsync()
         {
-            var dataTable = await _productRepo.LoadSnacksAsync();
-            productsGC.DataSource = dataTable;
+            productsGC.DataSource = await _productService.LoadSnacksAsync();
         }
+
         private async Task LoadMealsAsync()
         {
-            var dataTable = await _productRepo.LoadMealsAsync();
-            productsGC.DataSource = dataTable;
+            productsGC.DataSource = await _productService.LoadMealsAsync();
         }
 
         private async Task LoadProductsAsync()
         {
-            var dataTable = await _productRepo.LoadProductsAsync();
-            productsGC.DataSource = dataTable;
+            productsGC.DataSource = await _productService.LoadProductsAsync();
         }
 
         private async Task LoadDrinksAsync()
         {
-            var dataTable = await _productRepo.LoadDrinksAsync();
-            productsGC.DataSource = dataTable;
+            productsGC.DataSource = await _productService.LoadDrinksAsync();
         }
 
         private void addtocartBTN_Click(object sender, EventArgs e)
@@ -65,7 +60,7 @@ namespace MealPassCapstone.Desktop.Forms.Staff
             string stockStr = productsGV.GetRowCellValue(selectedRow, "Quantity")?.ToString();
             int stock = int.TryParse(stockStr, out int s) ? s : 0;
 
-            if (stock <= 0)
+            if (!_cartService.IsInStock(stock))
             {
                 MessageBox.Show($"Sorry, '{productName}' is out of stock.", "Out of Stock", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -73,48 +68,28 @@ namespace MealPassCapstone.Desktop.Forms.Staff
 
             decimal price = decimal.TryParse(priceStr, out decimal p) ? p : 0;
             int quantity = 1;
-            decimal total = price * quantity;
 
             DataTable cartTable = cartGC.DataSource as DataTable;
             if (cartTable == null)
             {
-                cartTable = new DataTable();
-                cartTable.Columns.Add("ID");
-                cartTable.Columns.Add("ProductName");
-                cartTable.Columns.Add("Quantity", typeof(int));
-                cartTable.Columns.Add("Price", typeof(decimal));
-                cartTable.Columns.Add("Total", typeof(decimal));
+                cartTable = _cartService.CreateEmptyCart();
                 cartGC.DataSource = cartTable;
             }
 
-            bool alreadyInCart = cartTable.AsEnumerable().Any(r => r["ID"].ToString() == productID);
-            if (alreadyInCart)
+            if (_cartService.IsInCart(cartTable, productID))
             {
                 MessageBox.Show($"'{productName}' is already in your cart.", "Duplicate Item", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            DataRow newRow = cartTable.NewRow();
-            newRow["ID"] = productID;
-            newRow["ProductName"] = productName;
-            newRow["Quantity"] = quantity;
-            newRow["Price"] = price;
-            newRow["Total"] = total;
-            cartTable.Rows.Add(newRow);
+            _cartService.AddItem(cartTable, productID, productName, price, quantity);
 
             UpdateTotalAmount(cartTable);
         }
 
         private void UpdateTotalAmount(DataTable cartTable)
         {
-            decimal sum = 0;
-            foreach (DataRow row in cartTable.Rows)
-            {
-                if (decimal.TryParse(row["Total"]?.ToString(), out decimal total))
-                {
-                    sum += total;
-                }
-            }
+            decimal sum = _cartService.CalculateGrandTotal(cartTable);
             grandtotalLBL.Text = sum.ToString("N2");
         }
 
@@ -129,7 +104,7 @@ namespace MealPassCapstone.Desktop.Forms.Staff
                 if (int.TryParse(quantityObj?.ToString(), out int quantity) &&
                     decimal.TryParse(priceObj?.ToString(), out decimal price))
                 {
-                    decimal total = quantity * price;
+                    decimal total = _cartService.LineTotal(quantity, price);
                     cartGV.SetRowCellValue(rowHandle, "Total", total);
 
                     if (cartGC.DataSource is DataTable cartTable)
@@ -154,16 +129,7 @@ namespace MealPassCapstone.Desktop.Forms.Staff
 
             if (cartGC.DataSource is DataTable cartTable)
             {
-
-                var rowsToRemove = cartTable.AsEnumerable()
-                    .Where(r => r["ID"].ToString() == id)
-                    .ToList();
-
-                int deletedCount = rowsToRemove.Count;
-
-                foreach (var row in rowsToRemove)
-                    cartTable.Rows.Remove(row);
-
+                _cartService.RemoveItemsById(cartTable, id);
                 UpdateTotalAmount(cartTable);
                 view.RefreshData();
             }
@@ -174,25 +140,10 @@ namespace MealPassCapstone.Desktop.Forms.Staff
             FormHelper.DisplayForm(new Staff.PaymentOptionForm());
         }
 
-        private async void snacksBTN_Click(object sender, EventArgs e)
-        {
-            await LoadSnacksAsync();
-        }
-
-        private async void mealsBTN_Click(object sender, EventArgs e)
-        {
-            await LoadMealsAsync();
-        }
-
-        private async void drinksBTN_Click(object sender, EventArgs e)
-        {
-            await LoadDrinksAsync();
-        }
-
-        private async void allBTN_Click(object sender, EventArgs e)
-        {
-            await LoadProductsAsync();
-        }
+        private async void snacksBTN_Click(object sender, EventArgs e) => await LoadSnacksAsync();
+        private async void mealsBTN_Click(object sender, EventArgs e) => await LoadMealsAsync();
+        private async void drinksBTN_Click(object sender, EventArgs e) => await LoadDrinksAsync();
+        private async void allBTN_Click(object sender, EventArgs e) => await LoadProductsAsync();
 
         private void findTE_EditValueChanging(object sender, DevExpress.XtraEditors.Controls.ChangingEventArgs e)
         {

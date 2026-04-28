@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 using System.Windows.Forms;
-using DevExpress.XtraEditors;
+using MealPass.Business.Services;
 using MealPass.Core.Interface;
-using MealPass.Data.Repositories;
 
 namespace MealPassCapstone.Desktop.Forms.Admin
 {
     public partial class ProductsUC : DevExpress.XtraEditors.XtraUserControl
     {
-        private readonly IProductRepository _productRepository = new ProductRepository();
+        private readonly IProductService _productService = new ProductService();
 
         public ProductsUC()
         {
@@ -27,7 +19,7 @@ namespace MealPassCapstone.Desktop.Forms.Admin
         {
             try
             {
-                var productsTable = await _productRepository.GetAllWithDetailsAsync();
+                var productsTable = await _productService.GetAllWithDetailsAsync();
 
                 if (productsTable.Rows.Count == 0)
                 {
@@ -45,16 +37,13 @@ namespace MealPassCapstone.Desktop.Forms.Admin
 
         private void addproductBTN_Click(object sender, EventArgs e)
         {
-            // ✅ Create an instance of the form
             var form = new AddProductForm();
 
-            // 🔥 Subscribe to the ProductAdded event BEFORE showing it
             form.ProductAdded += (s, args) =>
             {
-                LoadProducts(); // ✅ Refresh grid when a new product is added
+                LoadProducts();
             };
 
-            // ✅ Show the form
             Helpers.FormHelper.DisplayForm(form);
         }
 
@@ -65,18 +54,15 @@ namespace MealPassCapstone.Desktop.Forms.Admin
 
         private void gvProducts_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
         {
-            // ✅ Get the ProductID from the clicked row
             var selectedProductID = gvProducts.GetRowCellValue(e.RowHandle, "ProductID");
 
             if (selectedProductID != null && int.TryParse(selectedProductID.ToString(), out int productId))
             {
-                // ✅ Open the EditProductForm with the selected ProductID
                 using (var editForm = new EditProductForm(productId))
                 {
                     editForm.ShowDialog();
                 }
 
-                // ✅ Refresh the product list after editing
                 LoadProducts();
             }
             else

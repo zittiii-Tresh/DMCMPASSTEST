@@ -5,13 +5,13 @@ using MealPass.Core.Entity;
 
 namespace MealPass.Core.Interface
 {
-    public interface IProductRepository
+    public interface IProductService
     {
         Task<IEnumerable<Product>> GetAllAsync();
         Task<Product> GetByIdAsync(int id);
         Task AddAsync(Product product);
         Task UpdateAsync(Product product);
-        Task UpdateProductAsync(int productId, string name, int categoryId, decimal price, int quantity, int lowStockLevel, int stockStatusId);
+        Task UpdateProductAsync(int productId, string name, int categoryId, decimal price, int quantity, int lowStockLevel);
         Task DeleteAsync(int id);
 
         Task<DataTable> GetAllWithDetailsAsync();

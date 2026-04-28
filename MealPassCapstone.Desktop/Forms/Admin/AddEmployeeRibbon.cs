@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
+using System;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Dapper;
-using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
-using MealPass.Core;
-using MealPassCapstone.Desktop.Helpers;
-
+using MealPass.Business.Services;
+using MealPass.Core.Entity;
+using MealPass.Core.Interface;
 
 namespace MealPassCapstone.Desktop.Forms.Admin
 {
     public partial class AddEmployeeRibbon : DevExpress.XtraBars.Ribbon.RibbonForm
     {
+        private readonly IEmployeeService _employeeService = new EmployeeService();
+        private readonly IPasswordService _passwordService = new PasswordService();
+
         public AddEmployeeRibbon()
         {
             InitializeComponent();
@@ -53,18 +48,7 @@ namespace MealPassCapstone.Desktop.Forms.Admin
         private void passwordBE_EditValueChanged(object sender, EventArgs e)
         {
             string password = passwordBE.Text;
-            string message = "";
-
-            if (password.Length < 8)
-                message += " - Must be at least 8 characters long\n";
-            if (!password.Any(char.IsUpper))
-                message += " - Must contain at least one uppercase letter\n";
-            if (!password.Any(char.IsLower))
-                message += " - Must contain at least one lowercase letter\n";
-            if (!password.Any(char.IsDigit))
-                message += " - Must contain at least one number\n";
-            if (!password.All(char.IsLetterOrDigit))
-                message += " - Must not contain special characters\n";
+            string message = _passwordService.Validate(password);
 
             if (string.IsNullOrEmpty(message))
             {
@@ -82,29 +66,7 @@ namespace MealPassCapstone.Desktop.Forms.Admin
             }
         }
 
-        private static void RegisterAccount(Employee employee)
-        {
-            using (var connection = new SqlConnection(Desktop.GlobalSQL.SQLQuery.connectionString))
-            {
-                connection.Open();
-
-                var query = Desktop.GlobalSQL.SQLQuery.InsertAccount;
-                int rowsAffected = connection.Execute(query, employee);
-            }
-        }
-
-        private bool UsernameExists(string username)
-        {
-            using (var connection = new SqlConnection(Desktop.GlobalSQL.SQLQuery.connectionString))
-            {
-                connection.Open();
-                string query = "SELECT COUNT(*) FROM dbo.Employees WHERE Username = @Username";
-                int count = connection.ExecuteScalar<int>(query, new { Username = username });
-                return count > 0;
-            }
-        }
-
-        private void addemployeeBTN_Click(object sender, EventArgs e)
+        private async void addemployeeBTN_Click(object sender, EventArgs e)
         {
             var confirmResult = XtraMessageBox.Show("Do you want to save this account?", "Confirm Save", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (confirmResult != DialogResult.Yes)
@@ -112,7 +74,7 @@ namespace MealPassCapstone.Desktop.Forms.Admin
 
             string username = usernameTE.Text.Trim();
 
-            if (UsernameExists(username))
+            if (await _employeeService.UsernameExistsAsync(username))
             {
                 XtraMessageBox.Show("Username already exists!", "Duplicate Record", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -121,29 +83,17 @@ namespace MealPassCapstone.Desktop.Forms.Admin
             int roleID = Convert.ToInt32(positionRG.EditValue);
             string gender = genderRG.EditValue?.ToString();
 
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(passwordBE.Text);
-
             int civilStatusID = 0;
             switch (civilstatusCBE.EditValue?.ToString())
             {
-                case "Single":
-                    civilStatusID = 1;
-                    break;
-                case "Married":
-                    civilStatusID = 2;
-                    break;
-                case "Widowed":
-                    civilStatusID = 3;
-                    break;
-                case "Separated":
-                    civilStatusID = 4;
-                    break;
-                default:
-                    civilStatusID = 0; // Or handle invalid case
-                    break;
+                case "Single": civilStatusID = 1; break;
+                case "Married": civilStatusID = 2; break;
+                case "Widowed": civilStatusID = 3; break;
+                case "Separated": civilStatusID = 4; break;
+                default: civilStatusID = 0; break;
             }
 
-            var employee = new MealPass.Core.Employee
+            var employee = new Employee
             {
                 FirstName = firstnameTE.Text,
                 MiddleName = middlenameTE.Text,
@@ -153,18 +103,15 @@ namespace MealPassCapstone.Desktop.Forms.Admin
                 CivilStatusID = civilStatusID,
                 Birthdate = (DateTime)(birthdateDE.EditValue == null ? (DateTime?)null : (DateTime)birthdateDE.EditValue),
                 Username = username,
-                Password = hashedPassword,
                 EmploymentStatus = 1,
                 RoleID = roleID,
                 Gender = gender
             };
 
-            RegisterAccount(employee);
+            await _employeeService.RegisterAsync(employee, passwordBE.Text);
 
-            //GlobalLogger.employeeLog("Added new employee", UserSession.Username);
             XtraMessageBox.Show("Account saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }
-
     }
 }

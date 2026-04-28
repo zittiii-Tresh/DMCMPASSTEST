@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
+using System;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.XtraBars;
+using MealPass.Business.Services;
+using MealPass.Core.Interface;
 
 namespace MealPassCapstone.Desktop.Forms.Admin
 {
     public partial class EditPasswordForm : DevExpress.XtraBars.Ribbon.RibbonForm
     {
+        private readonly IEmployeeService _employeeService = new EmployeeService();
+        private readonly IPasswordService _passwordService = new PasswordService();
+
         private readonly string _username;
+
         public EditPasswordForm(string username)
         {
             InitializeComponent();
@@ -26,7 +25,6 @@ namespace MealPassCapstone.Desktop.Forms.Admin
         {
             Helpers.TextHelper.AttachBehavior(passwordBE, "Password", true);
             Helpers.TextHelper.AttachBehavior(confirmpassBE, "Password", true);
-
         }
 
         private void passwordBE_ButtonPressed(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -50,7 +48,6 @@ namespace MealPassCapstone.Desktop.Forms.Admin
         private void passwordBE_EditValueChanged(object sender, EventArgs e)
         {
             string password = passwordBE.Text;
-            string message = "";
 
             if (string.IsNullOrWhiteSpace(password))
             {
@@ -62,16 +59,7 @@ namespace MealPassCapstone.Desktop.Forms.Admin
             resultcaptionLBL.Visible = true;
             resultLBL.Visible = true;
 
-            if (password.Length < 8)
-                message += " - Must be at least 8 characters long\n";
-            if (!password.Any(char.IsUpper))
-                message += " - Must contain at least one uppercase letter\n";
-            if (!password.Any(char.IsLower))
-                message += " - Must contain at least one lowercase letter\n";
-            if (!password.Any(char.IsDigit))
-                message += " - Must contain at least one number\n";
-            if (!password.All(char.IsLetterOrDigit))
-                message += " - Must not contain special characters\n";
+            string message = _passwordService.Validate(password);
 
             if (string.IsNullOrEmpty(message))
             {
@@ -114,7 +102,7 @@ namespace MealPassCapstone.Desktop.Forms.Admin
             }
         }
 
-        private void saveBTN_Click(object sender, EventArgs e)
+        private async void saveBTN_Click(object sender, EventArgs e)
         {
             string newPassword = passwordBE.Text;
             string confirmPassword = confirmpassBE.Text;
@@ -131,42 +119,22 @@ namespace MealPassCapstone.Desktop.Forms.Admin
                 return;
             }
 
-            // Password validation (you already validate live too)
-            if (newPassword.Length < 8 ||
-                !newPassword.Any(char.IsUpper) ||
-                !newPassword.Any(char.IsLower) ||
-                !newPassword.Any(char.IsDigit) ||
-                !newPassword.All(char.IsLetterOrDigit))
+            if (!string.IsNullOrEmpty(_passwordService.Validate(newPassword)))
             {
                 MessageBox.Show("Password does not meet the requirements.");
                 return;
             }
 
-            // Hash and update in DB
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(newPassword);
+            int rowsAffected = await _employeeService.UpdatePasswordAsync(_username, newPassword);
 
-            using (SqlConnection conn = new SqlConnection(GlobalSQL.SQLQuery.connectionString))
+            if (rowsAffected > 0)
             {
-                conn.Open();
-                string query = "UPDATE dbo.Employees SET Password = @password, FailedAttempts = 0, IsLocked = 0 WHERE Username = @username";
-
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@password", hashedPassword);
-                    cmd.Parameters.AddWithValue("@username", _username); // use stored username
-
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    if (rowsAffected > 0)
-                    {
-                        //GlobalLogger.employeeLog("Edited employee password", _username);
-                        MessageBox.Show("Password updated successfully.");
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Failed to update password.");
-                    }
-                }
+                MessageBox.Show("Password updated successfully.");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Failed to update password.");
             }
         }
 
