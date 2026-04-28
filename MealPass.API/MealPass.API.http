@@ -1,0 +1,6 @@
+@MealPass.API_HostAddress = http://localhost:5129
+
+GET {{MealPass.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

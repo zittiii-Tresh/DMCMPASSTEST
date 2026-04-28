@@ -1,0 +1,329 @@
+﻿namespace MealPassCapstone.Desktop.Forms.Staff
+{
+    partial class StaffMainForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StaffMainForm));
+            posACE = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            purchasehistoryACE = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            sidePanel5 = new DevExpress.XtraEditors.SidePanel();
+            datetimeLBL = new DevExpress.XtraEditors.LabelControl();
+            sidePanel7 = new DevExpress.XtraEditors.SidePanel();
+            labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            sidePanel6 = new DevExpress.XtraEditors.SidePanel();
+            accordionControlElement5 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            topuphistoryACE = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            salesreportACE = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            sidePanel2 = new DevExpress.XtraEditors.SidePanel();
+            sidePanel4 = new DevExpress.XtraEditors.SidePanel();
+            productsACE = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            sidePanel3 = new DevExpress.XtraEditors.SidePanel();
+            mainSPanel = new DevExpress.XtraEditors.SidePanel();
+            accordionControl1 = new DevExpress.XtraBars.Navigation.AccordionControl();
+            sidePanel1 = new DevExpress.XtraEditors.SidePanel();
+            sidePanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)accordionControl1).BeginInit();
+            sidePanel1.SuspendLayout();
+            SuspendLayout();
+            // 
+            // posACE
+            // 
+            posACE.Appearance.Default.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            posACE.Appearance.Default.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            posACE.Appearance.Default.Options.UseFont = true;
+            posACE.Appearance.Default.Options.UseForeColor = true;
+            posACE.HeaderIndent = 28;
+            posACE.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("posACE.ImageOptions.SvgImage");
+            posACE.ImageOptions.SvgImageSize = new System.Drawing.Size(35, 35);
+            posACE.Name = "posACE";
+            posACE.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            posACE.Text = "POS";
+            posACE.Click += posACE_Click;
+            // 
+            // purchasehistoryACE
+            // 
+            purchasehistoryACE.Appearance.Default.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            purchasehistoryACE.Appearance.Default.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            purchasehistoryACE.Appearance.Default.Options.UseFont = true;
+            purchasehistoryACE.Appearance.Default.Options.UseForeColor = true;
+            purchasehistoryACE.HeaderIndent = 10;
+            purchasehistoryACE.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("purchasehistoryACE.ImageOptions.SvgImage");
+            purchasehistoryACE.Name = "purchasehistoryACE";
+            purchasehistoryACE.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            purchasehistoryACE.Text = "Purchase History";
+            // 
+            // sidePanel5
+            // 
+            sidePanel5.AllowResize = false;
+            sidePanel5.BorderThickness = 0;
+            sidePanel5.Controls.Add(datetimeLBL);
+            sidePanel5.Controls.Add(sidePanel7);
+            sidePanel5.Controls.Add(labelControl1);
+            sidePanel5.Controls.Add(sidePanel6);
+            sidePanel5.Dock = System.Windows.Forms.DockStyle.Right;
+            sidePanel5.Location = new System.Drawing.Point(904, 7);
+            sidePanel5.Name = "sidePanel5";
+            sidePanel5.Size = new System.Drawing.Size(512, 63);
+            sidePanel5.TabIndex = 3;
+            sidePanel5.Text = "sidePanel5";
+            // 
+            // datetimeLBL
+            // 
+            datetimeLBL.Appearance.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            datetimeLBL.Appearance.ForeColor = System.Drawing.Color.White;
+            datetimeLBL.Appearance.Options.UseFont = true;
+            datetimeLBL.Appearance.Options.UseForeColor = true;
+            datetimeLBL.Location = new System.Drawing.Point(191, 23);
+            datetimeLBL.Name = "datetimeLBL";
+            datetimeLBL.Size = new System.Drawing.Size(110, 20);
+            datetimeLBL.TabIndex = 2;
+            datetimeLBL.Text = "Date    /     Time";
+            // 
+            // sidePanel7
+            // 
+            sidePanel7.AllowResize = false;
+            sidePanel7.BackgroundImage = (System.Drawing.Image)resources.GetObject("sidePanel7.BackgroundImage");
+            sidePanel7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            sidePanel7.Location = new System.Drawing.Point(129, 18);
+            sidePanel7.Name = "sidePanel7";
+            sidePanel7.Size = new System.Drawing.Size(30, 30);
+            sidePanel7.TabIndex = 1;
+            sidePanel7.Text = "sidePanel7";
+            // 
+            // labelControl1
+            // 
+            labelControl1.Appearance.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            labelControl1.Appearance.ForeColor = System.Drawing.Color.White;
+            labelControl1.Appearance.Options.UseFont = true;
+            labelControl1.Appearance.Options.UseForeColor = true;
+            labelControl1.Location = new System.Drawing.Point(53, 24);
+            labelControl1.Name = "labelControl1";
+            labelControl1.Size = new System.Drawing.Size(48, 18);
+            labelControl1.TabIndex = 1;
+            labelControl1.Text = "Admin";
+            // 
+            // sidePanel6
+            // 
+            sidePanel6.AllowResize = false;
+            sidePanel6.BackgroundImage = (System.Drawing.Image)resources.GetObject("sidePanel6.BackgroundImage");
+            sidePanel6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            sidePanel6.Location = new System.Drawing.Point(8, 17);
+            sidePanel6.Name = "sidePanel6";
+            sidePanel6.Size = new System.Drawing.Size(30, 30);
+            sidePanel6.TabIndex = 0;
+            sidePanel6.Text = "sidePanel6";
+            // 
+            // accordionControlElement5
+            // 
+            accordionControlElement5.Appearance.Default.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            accordionControlElement5.Appearance.Default.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            accordionControlElement5.Appearance.Default.Options.UseFont = true;
+            accordionControlElement5.Appearance.Default.Options.UseForeColor = true;
+            accordionControlElement5.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] { purchasehistoryACE, topuphistoryACE });
+            accordionControlElement5.HeaderIndent = 28;
+            accordionControlElement5.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("accordionControlElement5.ImageOptions.SvgImage");
+            accordionControlElement5.ImageOptions.SvgImageSize = new System.Drawing.Size(35, 35);
+            accordionControlElement5.Name = "accordionControlElement5";
+            accordionControlElement5.Text = "Transaction History";
+            // 
+            // topuphistoryACE
+            // 
+            topuphistoryACE.Appearance.Default.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            topuphistoryACE.Appearance.Default.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            topuphistoryACE.Appearance.Default.Options.UseFont = true;
+            topuphistoryACE.Appearance.Default.Options.UseForeColor = true;
+            topuphistoryACE.HeaderIndent = 10;
+            topuphistoryACE.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("topuphistoryACE.ImageOptions.SvgImage");
+            topuphistoryACE.Name = "topuphistoryACE";
+            topuphistoryACE.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            topuphistoryACE.Text = "Top-Up History";
+            // 
+            // salesreportACE
+            // 
+            salesreportACE.Appearance.Default.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            salesreportACE.Appearance.Default.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            salesreportACE.Appearance.Default.Options.UseFont = true;
+            salesreportACE.Appearance.Default.Options.UseForeColor = true;
+            salesreportACE.HeaderIndent = 28;
+            salesreportACE.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("salesreportACE.ImageOptions.SvgImage");
+            salesreportACE.ImageOptions.SvgImageSize = new System.Drawing.Size(35, 35);
+            salesreportACE.Name = "salesreportACE";
+            salesreportACE.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            salesreportACE.Text = "Sales Report";
+            // 
+            // sidePanel2
+            // 
+            sidePanel2.AllowResize = false;
+            sidePanel2.BackgroundImage = (System.Drawing.Image)resources.GetObject("sidePanel2.BackgroundImage");
+            sidePanel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            sidePanel2.BorderThickness = 0;
+            sidePanel2.Dock = System.Windows.Forms.DockStyle.Left;
+            sidePanel2.Location = new System.Drawing.Point(100, 7);
+            sidePanel2.Name = "sidePanel2";
+            sidePanel2.Size = new System.Drawing.Size(118, 63);
+            sidePanel2.TabIndex = 2;
+            sidePanel2.Text = "sidePanel2";
+            // 
+            // sidePanel4
+            // 
+            sidePanel4.AllowResize = false;
+            sidePanel4.BorderThickness = 0;
+            sidePanel4.Dock = System.Windows.Forms.DockStyle.Top;
+            sidePanel4.Location = new System.Drawing.Point(100, 0);
+            sidePanel4.Name = "sidePanel4";
+            sidePanel4.Size = new System.Drawing.Size(1316, 7);
+            sidePanel4.TabIndex = 1;
+            sidePanel4.Text = "sidePanel4";
+            // 
+            // productsACE
+            // 
+            productsACE.Appearance.Default.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            productsACE.Appearance.Default.ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            productsACE.Appearance.Default.Options.UseFont = true;
+            productsACE.Appearance.Default.Options.UseForeColor = true;
+            productsACE.HeaderIndent = 28;
+            productsACE.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("productsACE.ImageOptions.SvgImage");
+            productsACE.ImageOptions.SvgImageSize = new System.Drawing.Size(35, 35);
+            productsACE.Name = "productsACE";
+            productsACE.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            productsACE.Text = "Top-Up";
+            // 
+            // sidePanel3
+            // 
+            sidePanel3.AllowResize = false;
+            sidePanel3.BorderThickness = 0;
+            sidePanel3.Dock = System.Windows.Forms.DockStyle.Left;
+            sidePanel3.Location = new System.Drawing.Point(0, 0);
+            sidePanel3.Name = "sidePanel3";
+            sidePanel3.Size = new System.Drawing.Size(100, 70);
+            sidePanel3.TabIndex = 0;
+            sidePanel3.Text = "sidePanel3";
+            // 
+            // mainSPanel
+            // 
+            mainSPanel.AllowResize = false;
+            mainSPanel.Appearance.BackColor = System.Drawing.Color.FromArgb(243, 243, 243);
+            mainSPanel.Appearance.Options.UseBackColor = true;
+            mainSPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            mainSPanel.Location = new System.Drawing.Point(304, 70);
+            mainSPanel.Name = "mainSPanel";
+            mainSPanel.Size = new System.Drawing.Size(1112, 737);
+            mainSPanel.TabIndex = 5;
+            mainSPanel.Text = "sidePanel5";
+            // 
+            // accordionControl1
+            // 
+            accordionControl1.AllowDrop = true;
+            accordionControl1.AllowElementDragging = true;
+            accordionControl1.AllowItemSelection = true;
+            accordionControl1.AnimationType = DevExpress.XtraBars.Navigation.AnimationType.Spline;
+            accordionControl1.Appearance.AccordionControl.BackColor = System.Drawing.Color.White;
+            accordionControl1.Appearance.AccordionControl.BorderColor = System.Drawing.Color.Gray;
+            accordionControl1.Appearance.AccordionControl.Options.UseBackColor = true;
+            accordionControl1.Appearance.AccordionControl.Options.UseBorderColor = true;
+            accordionControl1.Appearance.Group.Default.BorderColor = System.Drawing.Color.Gray;
+            accordionControl1.Appearance.Group.Default.Options.UseBorderColor = true;
+            accordionControl1.Appearance.Hint.BorderColor = System.Drawing.Color.Gray;
+            accordionControl1.Appearance.Hint.Options.UseBorderColor = true;
+            accordionControl1.Appearance.ItemWithContainer.Default.BorderColor = System.Drawing.Color.Gray;
+            accordionControl1.Appearance.ItemWithContainer.Default.Options.UseBorderColor = true;
+            accordionControl1.Dock = System.Windows.Forms.DockStyle.Left;
+            accordionControl1.ElementPositionOnExpanding = DevExpress.XtraBars.Navigation.ElementPositionOnExpanding.Fixed;
+            accordionControl1.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] { posACE, productsACE, salesreportACE, accordionControlElement5 });
+            accordionControl1.Location = new System.Drawing.Point(0, 70);
+            accordionControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            accordionControl1.Name = "accordionControl1";
+            accordionControl1.OptionsFooter.ActiveGroupDisplayMode = DevExpress.XtraBars.Navigation.ActiveGroupDisplayMode.GroupHeaderAndContent;
+            accordionControl1.OptionsMinimizing.AllowMinimizeMode = DevExpress.Utils.DefaultBoolean.True;
+            accordionControl1.Padding = new System.Windows.Forms.Padding(9, 8, 9, 8);
+            accordionControl1.ScrollBarMode = DevExpress.XtraBars.Navigation.ScrollBarMode.Touch;
+            accordionControl1.Size = new System.Drawing.Size(304, 737);
+            accordionControl1.TabIndex = 4;
+            accordionControl1.ViewType = DevExpress.XtraBars.Navigation.AccordionControlViewType.HamburgerMenu;
+            // 
+            // sidePanel1
+            // 
+            sidePanel1.AllowResize = false;
+            sidePanel1.Appearance.BackColor = System.Drawing.Color.FromArgb(23, 61, 26);
+            sidePanel1.Appearance.Options.UseBackColor = true;
+            sidePanel1.BorderThickness = 0;
+            sidePanel1.Controls.Add(sidePanel5);
+            sidePanel1.Controls.Add(sidePanel2);
+            sidePanel1.Controls.Add(sidePanel4);
+            sidePanel1.Controls.Add(sidePanel3);
+            sidePanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            sidePanel1.Location = new System.Drawing.Point(0, 0);
+            sidePanel1.Name = "sidePanel1";
+            sidePanel1.Size = new System.Drawing.Size(1416, 70);
+            sidePanel1.TabIndex = 3;
+            sidePanel1.Text = "sidePanel1";
+            // 
+            // StaffMainForm
+            // 
+            Appearance.BackColor = System.Drawing.Color.FromArgb(243, 243, 243);
+            Appearance.Options.UseBackColor = true;
+            AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1416, 807);
+            Controls.Add(mainSPanel);
+            Controls.Add(accordionControl1);
+            Controls.Add(sidePanel1);
+            IconOptions.Image = (System.Drawing.Image)resources.GetObject("StaffMainForm.IconOptions.Image");
+            Name = "StaffMainForm";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "StaffMainForm";
+            WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            sidePanel5.ResumeLayout(false);
+            sidePanel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)accordionControl1).EndInit();
+            sidePanel1.ResumeLayout(false);
+            ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private DevExpress.XtraBars.Navigation.AccordionControlElement posACE;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement purchasehistoryACE;
+        private DevExpress.XtraEditors.SidePanel sidePanel5;
+        private DevExpress.XtraEditors.LabelControl datetimeLBL;
+        private DevExpress.XtraEditors.SidePanel sidePanel7;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.SidePanel sidePanel6;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement5;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement topuphistoryACE;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement salesreportACE;
+        private DevExpress.XtraEditors.SidePanel sidePanel2;
+        private DevExpress.XtraEditors.SidePanel sidePanel4;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement productsACE;
+        private DevExpress.XtraEditors.SidePanel sidePanel3;
+        private DevExpress.XtraEditors.SidePanel mainSPanel;
+        private DevExpress.XtraBars.Navigation.AccordionControl accordionControl1;
+        private DevExpress.XtraEditors.SidePanel sidePanel1;
+    }
+}

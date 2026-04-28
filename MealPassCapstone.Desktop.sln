@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36408.4
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealPassCapstone.Desktop", "MealPassCapstone.Desktop\MealPassCapstone.Desktop.csproj", "{0831F38A-738F-4591-B7FF-F67164FAC242}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealPass.API", "MealPass.API\MealPass.API.csproj", "{FC1F25B4-9D32-472E-9F11-896EE56443F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealPass.Web", "MealPass.Web\MealPass.Web.csproj", "{6E71A465-2294-4FE9-B99F-A36E36588A74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealPass.Business", "MealPass.Business\MealPass.Business.csproj", "{7844CD11-54CB-41F8-9912-708F42B99170}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealPass.Core", "MealPass.Core\MealPass.Core.csproj", "{8D44F2AE-7F11-4356-A057-90F009A86596}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealPass.Data", "MealPass.Data\MealPass.Data.csproj", "{8B21E3BC-58EF-4DA0-86A8-A6689B2BC2A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealPass.Shared", "MealPass.Shared\MealPass.Shared.csproj", "{060C76B8-DA07-4449-B7C8-14FD5EBA063A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0831F38A-738F-4591-B7FF-F67164FAC242}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0831F38A-738F-4591-B7FF-F67164FAC242}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0831F38A-738F-4591-B7FF-F67164FAC242}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0831F38A-738F-4591-B7FF-F67164FAC242}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC1F25B4-9D32-472E-9F11-896EE56443F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC1F25B4-9D32-472E-9F11-896EE56443F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC1F25B4-9D32-472E-9F11-896EE56443F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC1F25B4-9D32-472E-9F11-896EE56443F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E71A465-2294-4FE9-B99F-A36E36588A74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E71A465-2294-4FE9-B99F-A36E36588A74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E71A465-2294-4FE9-B99F-A36E36588A74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E71A465-2294-4FE9-B99F-A36E36588A74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7844CD11-54CB-41F8-9912-708F42B99170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7844CD11-54CB-41F8-9912-708F42B99170}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7844CD11-54CB-41F8-9912-708F42B99170}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7844CD11-54CB-41F8-9912-708F42B99170}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D44F2AE-7F11-4356-A057-90F009A86596}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D44F2AE-7F11-4356-A057-90F009A86596}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D44F2AE-7F11-4356-A057-90F009A86596}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D44F2AE-7F11-4356-A057-90F009A86596}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B21E3BC-58EF-4DA0-86A8-A6689B2BC2A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B21E3BC-58EF-4DA0-86A8-A6689B2BC2A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B21E3BC-58EF-4DA0-86A8-A6689B2BC2A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B21E3BC-58EF-4DA0-86A8-A6689B2BC2A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{060C76B8-DA07-4449-B7C8-14FD5EBA063A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{060C76B8-DA07-4449-B7C8-14FD5EBA063A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{060C76B8-DA07-4449-B7C8-14FD5EBA063A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{060C76B8-DA07-4449-B7C8-14FD5EBA063A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A751D568-FF12-414A-A151-7D8E4D766BE9}
+	EndGlobalSection
+EndGlobal
